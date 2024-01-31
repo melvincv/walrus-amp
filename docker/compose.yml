@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14.6
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD:
+      POSTGRES_DB: walrus
+
+  walrus:
+    image: sealio/walrus:v0.5.0
+    privileged: true
+    restart: unless-stopped
+    environment:
+      SERVER_DATA_SOURCE_ADDRESS:
+      SERVER_TLS_AUTO_CERT_DOMAINS: walrus.melvincv.com
+    ports:
+      - 80:80
+      - 443:443
